@@ -11,21 +11,6 @@ import tkinter.messagebox as mb
 from PIL import Image, ImageTk
 import os
 
-root = Tk()
-root.title("Untitled - Didactic Tribble")
-root.geometry("800x500")
-root.resizable(0, 0)
-
-# Specify the max. number of columns and rows available in the window.
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
-
-icon = ImageTk.PhotoImage(Image.open("pi.png"))
-root.iconphoto(False, icon)
-
-root.update()
-root.mainloop()
-
 
 def open_file():
     file = fd.askopenfile(defaultextension=".txt", filetypes=[("All types", "*.*"), ("Text File", "*.txt*")])
@@ -110,6 +95,21 @@ def about_commands():
 
     mb.showinfo(title="All commands", message=commands, width=60, height=40)
 
+
+root = Tk()
+root.title("Untitled - Didactic Tribble")
+root.geometry("800x500")
+root.resizable(0, 0)
+
+# Specify the max. number of columns and rows available in the window.
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
+
+icon = ImageTk.PhotoImage(Image.open("pi.png"))
+root.iconphoto(False, icon)
+
+root.update()
+root.mainloop()
 
 if __name__ == '__main__':
     print("Hello chickens...")
