@@ -107,9 +107,49 @@ root.rowconfigure(0, weight=1)
 
 icon = ImageTk.PhotoImage(Image.open("pi.png"))
 root.iconphoto(False, icon)
+file = ""
+
+menu_bar = Menu(root)
+
+file_menu = Menu(menu_bar, tearoff=False, activebackground="DodgerBlue")
+edit_menu = Menu(menu_bar, tearoff=False, activebackground="DodgerBlue")
+help_menu = Menu(menu_bar, tearoff=False, activebackground="DodgerBlue")
+
+file_menu.add_command(label="New", command=open_new_file)
+file_menu.add_command(label="Open File", command=open_file)
+file_menu.add_command(label="Save As", command=save_file)
+file_menu.add_separator()
+file_menu.add_command(label="Close File", command=exit_application)
+
+edit_menu.add_command(label="Copy", command=copy_text)
+edit_menu.add_command(label="Cut", command=cut_text)
+edit_menu.add_command(label="Paste", command=paste_text)
+edit_menu.add_separator()
+edit_menu.add_command(label="Select All", command=select_all)
+edit_menu.add_command(label="Delete", command=delete_last_char)
+
+help_menu.add_command(label="About Didactic Tribble", command=about_didactic_tribble)
+help_menu.add_command(label="About Commands", command=about_commands)
+
+menu_bar.add_cascade(label="File", menu=file_menu)
+menu_bar.add_cascade(label="Edit", menu=edit_menu)
+menu_bar.add_cascade(label="Help", menu=help_menu)
+
+root.config(menu=menu_bar)
+
+text_area = Text(root, font=("Times New Roman", 12))
+text_area.grid(sticky=NSEW)
+
+scroller = Scrollbar(text_area, orient=VERTICAL)
+scroller.pack(side=RIGHT, fill=Y)
+scroller.config(command=text_area.yview)
+
+text_area.config(yscrollcommand=scroller.set)
 
 root.update()
 root.mainloop()
 
+'''
 if __name__ == '__main__':
     print("Hello chickens...")
+'''
