@@ -13,7 +13,8 @@ import os
 
 
 def open_file():
-    file = fd.askopenfile(defaultextension=".txt", filetypes=[("All types", "*.*"), ("Text File", "*.txt*")])
+    global file
+    file = fd.askopenfilename(defaultextension=".txt", filetypes=[("All types", "*.*"), ("Text File", "*.txt*")])
 
     if file != "":
         root.title(f"{os.path.basename(file)}")
@@ -31,23 +32,22 @@ def open_new_file():
 
 
 def save_file():
-    global text_area
-    file = text_area.get(1.0, END)
-
-    if file != "":
+    global file
+    if file == '':
+        file = None
+    else:
         file = open(file, "w")
         file.write(text_area.get(1.0, END))
         file.close()
-    else:
-        file = None
 
     if file is None:
-        file = fd.asksaveasfilename(initialfile="Untitled.txt", defaultextension=".txt", filetypes=[("Text File", "*.txt*"), ("Word Document", '*,docx*'), ("PDF", "*.pdf*")])
+        file = fd.asksaveasfilename(initialfile='Untitled.txt', defaultextension='.txt',
+                                    filetypes=[("Text File", "*.txt*"), ("Word Document", '*,docx*'), ("PDF", "*.pdf*")])
     else:
         file = open(file, "w")
         file.write(text_area.get(1.0, END))
         file.close()
-        root.title(f"{os.path.basename(file)} - Didactic Tribble")
+        root.title(f"{os.path.basename(file)} - Notepad")
 
 
 def exit_application():
@@ -148,8 +148,3 @@ text_area.config(yscrollcommand=scroller.set)
 
 root.update()
 root.mainloop()
-
-'''
-if __name__ == '__main__':
-    print("Hello chickens...")
-'''
