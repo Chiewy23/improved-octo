@@ -33,7 +33,7 @@ def open_new_file():
 
 def save_file():
     global file
-    if file == '':
+    if file == "":
         file = None
     else:
         file = open(file, "w")
@@ -93,13 +93,13 @@ def about_commands():
     - 'Delete' deletes the last character
     """
 
-    mb.showinfo(title="All commands", message=commands, width=60, height=40)
+    mb.showinfo(title="All commands", message=commands)
 
 
 root = Tk()
 root.title("Untitled - Didactic Tribble")
 root.geometry("800x500")
-root.resizable(0, 0)
+root.resizable(False, False)
 
 # Specify the max. number of columns and rows available in the window.
 root.columnconfigure(0, weight=1)
