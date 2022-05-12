@@ -90,7 +90,7 @@ class TextEditor:
         self.text_area = Text(
             self.root,
             yscrollcommand=scroll_y.set,
-            font=("times new roman", 15, "bold"),
+            font=("Helvetica", 15, "bold"),
             state="normal",
             relief=GROOVE
         )
@@ -209,6 +209,11 @@ class TextEditor:
         self.text_area.bind("<Control-u>", self.undo)
 
 
-root = Tk()
-TextEditor(root)
-root.mainloop()
+def main():
+    root = Tk()
+    TextEditor(root)
+    root.mainloop()
+
+
+if __name__ == '__main__':
+    main()
