@@ -2,6 +2,9 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 
+DEFAULT_BAR_COLOUR = "#696969"
+DEFAULT_WIDTH = 4
+
 
 def info_about():
     messagebox.showinfo("About Didactic Tribble", "Created using Python.")
@@ -21,8 +24,10 @@ class TextEditor:
             self.root,
             textvariable=self.title,
             font=("Helvetica", 15, "bold"),
-            bd=2,
-            relief=GROOVE
+            bd=1,
+            relief=GROOVE,
+            bg=DEFAULT_BAR_COLOUR,
+            height=2
         )
 
         self.title_bar.pack(side=TOP, fill=BOTH)
@@ -33,14 +38,22 @@ class TextEditor:
             self.root,
             textvariable=self.status,
             font=("Helvetica", 15, "bold"),
-            bd=2,
-            relief=GROOVE)
+            bd=1,
+            relief=GROOVE,
+            bg=DEFAULT_BAR_COLOUR,
+            height=2
+        )
 
         self.status_bar.pack(side=BOTTOM, fill=BOTH)
-        self.status.set("Welcome To Text Editor")
+        self.status.set("Welcome To Didactic Tribble")
 
         # ##### MENU BAR #####
-        self.menu_bar = Menu(self.root, font=("Helvetica", 15, "bold"), activebackground="white")
+        self.menu_bar = Menu(
+            self.root,
+            font=("Helvetica", 15, "bold"),
+            activebackground="white"
+        )
+
         self.root.config(menu=self.menu_bar)
 
         # ##### FILE MENU #####
@@ -85,14 +98,16 @@ class TextEditor:
         self.help_menu.add_command(label="About", command=info_about)
         self.menu_bar.add_cascade(label="Help", menu=self.help_menu)
 
-        # ##### SCROLLBAR #####
+        # ##### SCROLLBAR & TEXT AREA #####
         scroll_y = Scrollbar(self.root, orient=VERTICAL)
         self.text_area = Text(
             self.root,
             yscrollcommand=scroll_y.set,
-            font=("Helvetica", 15, "bold"),
+            font=("Helvetica", 15),
             state="normal",
-            relief=GROOVE
+            relief=GROOVE,
+            bg="white",
+            fg="black"
         )
 
         scroll_y.pack(side=RIGHT, fill=Y)
