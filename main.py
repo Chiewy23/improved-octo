@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 
+import readchar as rc
+
 DEFAULT_BAR_COLOUR = "#696969"
 DEFAULT_WIDTH = 4
 
@@ -114,6 +116,13 @@ class TextEditor:
         scroll_y.config(command=self.text_area.yview)
         self.text_area.pack(fill=BOTH, expand=1)
         self.shortcuts()
+        # self.read_key_input()
+
+    def read_key_input(self):
+        while True:
+            char_input = rc.readchar()
+            if char_input == "q":
+                self.text_area.insert(END, "LOL")
 
     def set_title(self):
         if self.filename:
