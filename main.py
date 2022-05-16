@@ -1,8 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
-
-import readchar as rc
+from pynput.keyboard import Key, Listener
 
 DEFAULT_BAR_COLOUR = "#696969"
 DEFAULT_WIDTH = 4
@@ -116,13 +115,13 @@ class TextEditor:
         scroll_y.config(command=self.text_area.yview)
         self.text_area.pack(fill=BOTH, expand=1)
         self.shortcuts()
-        # self.read_key_input()
 
-    def read_key_input(self):
-        while True:
-            char_input = rc.readchar()
-            if char_input == "q":
-                self.text_area.insert(END, "LOL")
+        with Listener(on_press=self.read_key_input) as listener:
+            listener.join()
+
+    def read_key_input(self, key):
+        if key == Key.tab:
+            self.text_area.insert(END, "LOL")
 
     def set_title(self):
         if self.filename:
@@ -130,13 +129,13 @@ class TextEditor:
         else:
             self.title.set("Untitled")
 
-    def new_file(self, *args):
+    def new_file(self):
         self.text_area.delete("1.0", END)
         self.filename = None
         self.set_title()
         self.status.set("New File Created")
 
-    def open_file(self, *args):
+    def open_file(self):
         try:
             self.filename = filedialog.askopenfilename(
                 title="Select file",
@@ -152,9 +151,9 @@ class TextEditor:
                 self.set_title()
                 self.status.set("Opened Successfully")
         except Exception as e:
-            messagebox.showerror("Exception", e)
+            messagebox.showerror("Exception", str(e))
 
-    def save_file(self, *args):
+    def save_file(self):
         try:
             if self.filename:
                 data = self.text_area.get("1.0", END)
@@ -166,9 +165,9 @@ class TextEditor:
             else:
                 self.save_as_file()
         except Exception as e:
-            messagebox.showerror("Exception", e)
+            messagebox.showerror("Exception", str(e))
 
-    def save_as_file(self, *args):
+    def save_as_file(self):
         try:
             untitled_file = filedialog.asksaveasfilename(
                 title="Save file As",
@@ -185,25 +184,25 @@ class TextEditor:
             self.set_title()
             self.status.set("Saved Successfully")
         except Exception as e:
-            messagebox.showerror("Exception", e)
+            messagebox.showerror("Exception", str(e))
 
-    def exit(self, *args):
+    def exit(self):
         op = messagebox.askyesno("WARNING", "Your Unsaved Data May be Lost!!")
         if op > 0:
             self.root.destroy()
         else:
             return
 
-    def cut(self, *args):
+    def cut(self):
         self.text_area.event_generate("<<Cut>>")
 
-    def copy(self, *args):
+    def copy(self):
         self.text_area.event_generate("<<Copy>>")
 
-    def paste(self, *args):
+    def paste(self):
         self.text_area.event_generate("<<Paste>>")
 
-    def undo(self, *args):
+    def undo(self):
         try:
             if self.filename:
                 self.text_area.delete("1.0", END)
@@ -219,7 +218,7 @@ class TextEditor:
                 self.set_title()
                 self.status.set("Undone Successfully")
         except Exception as e:
-            messagebox.showerror("Exception", e)
+            messagebox.showerror("Exception", str(e))
 
     def shortcuts(self):
         self.text_area.bind("<Control-n>", self.new_file)
