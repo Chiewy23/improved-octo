@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
-from pynput.keyboard import Key, Listener
 
 DEFAULT_BAR_COLOUR = "#696969"
 DEFAULT_WIDTH = 4
@@ -108,20 +107,21 @@ class TextEditor:
             state="normal",
             relief=GROOVE,
             bg="white",
-            fg="black"
+            fg="black",
+            insertbackground="black"
         )
 
         scroll_y.pack(side=RIGHT, fill=Y)
         scroll_y.config(command=self.text_area.yview)
         self.text_area.pack(fill=BOTH, expand=1)
         self.shortcuts()
+        self.character_reader()
 
-        with Listener(on_press=self.read_key_input) as listener:
-            listener.join()
-
-    def read_key_input(self, key):
-        if key == Key.tab:
-            self.text_area.insert(END, "LOL")
+    def on_press(self, event):
+        # print('on_press: event:', event)
+        # print('on_press: keysym:', event.keysym)
+        print('{0} pressed'.format(event.keysym))
+        self.text_area.insert(END, "Test")
 
     def set_title(self):
         if self.filename:
@@ -230,6 +230,9 @@ class TextEditor:
         self.text_area.bind("<Control-c>", self.copy)
         self.text_area.bind("<Control-v>", self.paste)
         self.text_area.bind("<Control-u>", self.undo)
+
+    def character_reader(self):
+        self.text_area.bind('<KeyPress>', self.on_press)
 
 
 def main():
