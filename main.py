@@ -5,6 +5,33 @@ from tkinter import filedialog
 DEFAULT_BAR_COLOUR = "#696969"
 DEFAULT_WIDTH = 4
 
+CHARACTER_DIC = {
+    'a': 'alpha',
+    'b': 'beta',
+    'g': 'gamma',
+    'd': 'delta',
+    'e': 'epsilon',
+    'z': 'zeta',
+    '@': 'eta',
+    '£': 'theta',
+    'i': 'iota',
+    'k': 'kappa',
+    'l': 'lambda',
+    'm': 'mu',
+    'n': 'nu',
+    '$': 'xi',
+    'o': 'omnicron',
+    'p': 'pi',
+    'r': 'rho',
+    's': 'sigma',
+    't': 'tau',
+    'u': 'upsilon',
+    '¢': 'phi',
+    'x': 'chi',
+    '%': 'psi',
+    '^': 'omega'
+}
+
 
 def info_about():
     messagebox.showinfo("About Didactic Tribble", "Created using Python.")
@@ -118,10 +145,12 @@ class TextEditor:
         self.character_reader()
 
     def on_press(self, event):
-        # print('on_press: event:', event)
-        # print('on_press: keysym:', event.keysym)
-        print('{0} pressed'.format(event.keysym))
-        self.text_area.insert(END, "Test")
+        # Needs debugging
+        greek_character = CHARACTER_DIC.get(event.keysym, "INVALID")
+        self.text_area.insert(END, greek_character)
+
+        if greek_character != "INVALID":
+            self.text_area.delete("end-2c", END)
 
     def set_title(self):
         if self.filename:
