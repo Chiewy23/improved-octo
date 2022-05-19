@@ -146,10 +146,12 @@ class TextEditor:
 
     def on_press(self, event):
         # Needs debugging
+        # https://tkdocs.com/shipman/
+        # https://www.tcl.tk/man/tcl8.6/TkCmd/text.html
         greek_character = CHARACTER_DIC.get(event.keysym, "INVALID")
-        self.text_area.insert(END, greek_character)
 
         if greek_character != "INVALID":
+            self.text_area.insert(END, greek_character)
             self.text_area.delete("end-2c", END)
 
     def set_title(self):
