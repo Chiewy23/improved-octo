@@ -164,7 +164,6 @@ class TextEditor:
         self.character_reader()
 
     def on_press(self, event):
-        test = event.keysym
         character = CHARACTER_DIC.get(event.keysym, "INVALID")
 
         if character != "INVALID":
