@@ -2,6 +2,17 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 
+'''
+TO-DO:
+- Add accented options for letters.
+- Add uppercase alphabet.
+- Extract code/methods (general refactor).
+- Remove redundant code.
+- Unit tests.
+- Styling.
+- Package and deployment.
+'''
+
 DEFAULT_BAR_COLOUR = "#696969"
 DEFAULT_WIDTH = 4
 
