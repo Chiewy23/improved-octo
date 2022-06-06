@@ -2,8 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 
-import time
-
 DEFAULT_BAR_COLOUR = "#696969"
 DEFAULT_WIDTH = 4
 
