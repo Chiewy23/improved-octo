@@ -46,13 +46,13 @@ CHARACTER_DIC = {
 
 
 def info_about():
-    messagebox.showinfo("About Didactic Tribble", "Created using Python.")
+    messagebox.showinfo("About Octo", "Created using Python.")
 
 
 class TextEditor:
     def __init__(self, _root):
         self.root = _root
-        self.root.title("Didactic Tribble")
+        self.root.title("Octo")
         self.root.geometry("1200x700+200+150")
         self.filename = None
         self.title = StringVar()
@@ -84,7 +84,7 @@ class TextEditor:
         )
 
         self.status_bar.pack(side=BOTTOM, fill=BOTH)
-        self.status.set("Welcome To Didactic Tribble")
+        self.status.set("Welcome To Octo")
 
         # ##### MENU BAR #####
         self.menu_bar = Menu(
