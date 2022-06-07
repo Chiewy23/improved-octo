@@ -8,7 +8,9 @@ import character_sets.greek as greek
 TO-DO:
 - Add accented options for letters.
 - Add uppercase alphabet.
+- Replaced duplicate config values with global settings.
 - Extract code/methods (general refactor).
+- Add help options to menu for character set.
 - Remove redundant code.
 - Unit tests.
 - Styling.
