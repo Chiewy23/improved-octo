@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 
+import character_sets.greek as greek
+
 '''
 TO-DO:
 - Add accented options for letters.
@@ -15,34 +17,6 @@ TO-DO:
 
 DEFAULT_BAR_COLOUR = "#696969"
 DEFAULT_WIDTH = 4
-
-CHARACTER_DIC = {
-    'a': 'α',
-    'b': 'β',
-    'g': 'γ',
-    'd': 'δ',
-    'e': 'ε',
-    'z': 'ζ',
-    '@': 'η',
-    '£': 'θ',
-    'i': 'ι',
-    'k': 'κ',
-    'l': 'λ',
-    'm': 'μ',
-    'n': 'ν',
-    '$': 'ξ',
-    'o': 'ο',
-    'p': 'π',
-    'r': 'ρ',
-    's': 'σ/ς',
-    't': 'τ',
-    'u': 'υ',
-    '¢': 'φ',
-    'x': 'χ',
-    '%': 'ψ',
-    '^': 'ω',
-    'space': ' '
-}
 
 
 def info_about():
@@ -175,7 +149,7 @@ class TextEditor:
         self.character_reader()
 
     def on_press(self, event):
-        character = CHARACTER_DIC.get(event.keysym, "INVALID")
+        character = greek.LOWERCASE.get(event.keysym, "INVALID")
 
         if character != "INVALID":
             self.text_area_greek.insert(END, character)
