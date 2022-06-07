@@ -113,7 +113,7 @@ class TextEditor:
 
         # ##### SCROLLBAR & TEXT AREA #####
         scroll_y = Scrollbar(self.root, orient=VERTICAL)
-        self.text_area_english = Text(
+        self.text_area_input = Text(
             self.root,
             yscrollcommand=scroll_y.set,
             font=("Helvetica", 15),
@@ -124,10 +124,10 @@ class TextEditor:
             insertbackground="black"
         )
 
-        scroll_y_greek = Scrollbar(self.root, orient=VERTICAL)
-        self.text_area_greek = Text(
+        scroll_y_output = Scrollbar(self.root, orient=VERTICAL)
+        self.text_area_output = Text(
             self.root,
-            yscrollcommand=scroll_y_greek.set,
+            yscrollcommand=scroll_y_output.set,
             font=("Helvetica", 15),
             state="normal",
             relief=GROOVE,
@@ -137,22 +137,22 @@ class TextEditor:
         )
 
         scroll_y.pack(side=RIGHT, fill=Y)
-        scroll_y_greek.pack(side=RIGHT, fill=Y)
+        scroll_y_output.pack(side=RIGHT, fill=Y)
 
-        scroll_y.config(command=self.text_area_english.yview)
-        scroll_y_greek.config(command=self.text_area_greek.yview())
+        scroll_y.config(command=self.text_area_input.yview)
+        scroll_y_output.config(command=self.text_area_output.yview())
 
-        self.text_area_english.pack(fill=BOTH, expand=1)
-        self.text_area_greek.pack(fill=BOTH, expand=1)
+        self.text_area_input.pack(fill=BOTH, expand=1)
+        self.text_area_output.pack(fill=BOTH, expand=1)
 
         self.shortcuts()
         self.character_reader()
 
     def on_press(self, event):
-        character = greek.LOWERCASE.get(event.keysym, "INVALID")
+        character = greek.CHARACTER_SET.get(event.keysym, "INVALID")
 
         if character != "INVALID":
-            self.text_area_greek.insert(END, character)
+            self.text_area_output.insert(END, character)
 
     def set_title(self):
         if self.filename:
@@ -161,7 +161,7 @@ class TextEditor:
             self.title.set("Untitled")
 
     def new_file(self):
-        self.text_area_english.delete("1.0", END)
+        self.text_area_input.delete("1.0", END)
         self.filename = None
         self.set_title()
         self.status.set("New File Created")
@@ -175,9 +175,9 @@ class TextEditor:
 
             if self.filename:
                 infile = open(self.filename, "r")
-                self.text_area_english.delete("1.0", END)
+                self.text_area_input.delete("1.0", END)
                 for line in infile:
-                    self.text_area_english.insert(END, line)
+                    self.text_area_input.insert(END, line)
                 infile.close()
                 self.set_title()
                 self.status.set("Opened Successfully")
@@ -187,7 +187,7 @@ class TextEditor:
     def save_file(self):
         try:
             if self.filename:
-                data = self.text_area_english.get("1.0", END)
+                data = self.text_area_input.get("1.0", END)
                 outfile = open(self.filename, "w")
                 outfile.write(data)
                 outfile.close()
@@ -207,7 +207,7 @@ class TextEditor:
                 filetypes=(("All Files", "*.*"), ("Text Files", "*.txt"), ("Python Files", "*.py"))
             )
 
-            data = self.text_area_english.get("1.0", END)
+            data = self.text_area_input.get("1.0", END)
             outfile = open(untitled_file, "w")
             outfile.write(data)
             outfile.close()
@@ -225,26 +225,26 @@ class TextEditor:
             return
 
     def cut(self):
-        self.text_area_english.event_generate("<<Cut>>")
+        self.text_area_input.event_generate("<<Cut>>")
 
     def copy(self):
-        self.text_area_english.event_generate("<<Copy>>")
+        self.text_area_input.event_generate("<<Copy>>")
 
     def paste(self):
-        self.text_area_english.event_generate("<<Paste>>")
+        self.text_area_input.event_generate("<<Paste>>")
 
     def undo(self):
         try:
             if self.filename:
-                self.text_area_english.delete("1.0", END)
+                self.text_area_input.delete("1.0", END)
                 infile = open(self.filename, "r")
                 for line in infile:
-                    self.text_area_english.insert(END, line)
+                    self.text_area_input.insert(END, line)
                 infile.close()
                 self.set_title()
                 self.status.set("Undone Successfully")
             else:
-                self.text_area_english.delete("1.0", END)
+                self.text_area_input.delete("1.0", END)
                 self.filename = None
                 self.set_title()
                 self.status.set("Undone Successfully")
@@ -252,18 +252,18 @@ class TextEditor:
             messagebox.showerror("Exception", str(e))
 
     def shortcuts(self):
-        self.text_area_english.bind("<Control-n>", self.new_file)
-        self.text_area_english.bind("<Control-o>", self.open_file)
-        self.text_area_english.bind("<Control-s>", self.save_file)
-        self.text_area_english.bind("<Control-a>", self.save_as_file)
-        self.text_area_english.bind("<Control-e>", self.exit)
-        self.text_area_english.bind("<Control-x>", self.cut)
-        self.text_area_english.bind("<Control-c>", self.copy)
-        self.text_area_english.bind("<Control-v>", self.paste)
-        self.text_area_english.bind("<Control-u>", self.undo)
+        self.text_area_input.bind("<Control-n>", self.new_file)
+        self.text_area_input.bind("<Control-o>", self.open_file)
+        self.text_area_input.bind("<Control-s>", self.save_file)
+        self.text_area_input.bind("<Control-a>", self.save_as_file)
+        self.text_area_input.bind("<Control-e>", self.exit)
+        self.text_area_input.bind("<Control-x>", self.cut)
+        self.text_area_input.bind("<Control-c>", self.copy)
+        self.text_area_input.bind("<Control-v>", self.paste)
+        self.text_area_input.bind("<Control-u>", self.undo)
 
     def character_reader(self):
-        self.text_area_english.bind('<KeyPress>', self.on_press)
+        self.text_area_input.bind('<KeyPress>', self.on_press)
 
 
 def main():
