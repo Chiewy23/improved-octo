@@ -7,7 +7,6 @@ import character_sets.greek as greek
 '''
 TO-DO:
 - Add accented options for letters.
-- Add uppercase alphabet.
 - Replaced duplicate config values with global settings.
 - Extract code/methods (general refactor).
 - Add help options to menu for character set.
@@ -19,6 +18,9 @@ TO-DO:
 
 DEFAULT_BAR_COLOUR = "#696969"
 DEFAULT_WIDTH = 4
+DEFAULT_FONT_SIZE = 15
+DEFAULT_FONT = "Helvetica"
+DEFAULT_FONT_STYLE = "bold"
 
 
 def info_about():
@@ -38,7 +40,7 @@ class TextEditor:
         self.title_bar = Label(
             self.root,
             textvariable=self.title,
-            font=("Helvetica", 15, "bold"),
+            font=(DEFAULT_FONT, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE),
             bd=1,
             relief=GROOVE,
             bg=DEFAULT_BAR_COLOUR,
@@ -52,7 +54,7 @@ class TextEditor:
         self.status_bar = Label(
             self.root,
             textvariable=self.status,
-            font=("Helvetica", 15, "bold"),
+            font=(DEFAULT_FONT, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE),
             bd=1,
             relief=GROOVE,
             bg=DEFAULT_BAR_COLOUR,
@@ -65,7 +67,7 @@ class TextEditor:
         # ##### MENU BAR #####
         self.menu_bar = Menu(
             self.root,
-            font=("Helvetica", 15, "bold"),
+            font=(DEFAULT_FONT, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE),
             activebackground="white"
         )
 
@@ -74,7 +76,7 @@ class TextEditor:
         # ##### FILE MENU #####
         self.file_menu = Menu(
             self.menu_bar,
-            font=("Helvetica", 12, "bold"),
+            font=(DEFAULT_FONT, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE),
             activebackground="white",
             tearoff=0
         )
@@ -90,7 +92,7 @@ class TextEditor:
         # ##### EDIT MENU #####
         self.edit_menu = Menu(
             self.menu_bar,
-            font=("Helvetica", 12, "bold"),
+            font=(DEFAULT_FONT, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE),
             activebackground="white",
             tearoff=0
         )
@@ -105,7 +107,7 @@ class TextEditor:
         # ##### HELP MENU #####
         self.help_menu = Menu(
             self.menu_bar,
-            font=("Helvetica", 12, "bold"),
+            font=(DEFAULT_FONT, DEFAULT_FONT_SIZE, DEFAULT_FONT_STYLE),
             activebackground="white",
             tearoff=0
         )
@@ -118,7 +120,7 @@ class TextEditor:
         self.text_area_input = Text(
             self.root,
             yscrollcommand=scroll_y.set,
-            font=("Helvetica", 15),
+            font=(DEFAULT_FONT, DEFAULT_FONT_SIZE),
             state="normal",
             relief=GROOVE,
             bg="white",
@@ -130,7 +132,7 @@ class TextEditor:
         self.text_area_output = Text(
             self.root,
             yscrollcommand=scroll_y_output.set,
-            font=("Helvetica", 15),
+            font=(DEFAULT_FONT, DEFAULT_FONT_SIZE),
             state="normal",
             relief=GROOVE,
             bg="white",
