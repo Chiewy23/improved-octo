@@ -6,7 +6,7 @@ import character_sets.greek as greek
 
 '''
 TO-DO:
-- Add accented options for letters.
+- Add accented options for letters (consider adding this as a menu option).
 - Replaced duplicate config values with global settings.
 - Extract code/methods (general refactor).
 - Add help options to menu for character set.
@@ -18,9 +18,9 @@ TO-DO:
 
 DEFAULT_BAR_COLOUR = "#6495ED"
 DEFAULT_WIDTH = 4
-DEFAULT_FONT_SIZE = 15
+DEFAULT_FONT_SIZE = 13
 DEFAULT_FONT = "Helvetica"
-DEFAULT_FONT_STYLE = "bold"
+DEFAULT_FONT_STYLE = "normal"
 
 
 def info_about():
