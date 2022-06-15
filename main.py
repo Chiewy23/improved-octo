@@ -16,7 +16,7 @@ TO-DO:
 - Package and deployment.
 '''
 
-DEFAULT_BAR_COLOUR = "#696969"
+DEFAULT_BAR_COLOUR = "#6495ED"
 DEFAULT_WIDTH = 4
 DEFAULT_FONT_SIZE = 15
 DEFAULT_FONT = "Helvetica"
@@ -125,7 +125,8 @@ class TextEditor:
             relief=GROOVE,
             bg="white",
             fg="black",
-            insertbackground="black"
+            insertbackground="black",
+            highlightthickness=0.5
         )
 
         scroll_y_output = Scrollbar(self.root, orient=VERTICAL)
@@ -137,7 +138,8 @@ class TextEditor:
             relief=GROOVE,
             bg="white",
             fg="black",
-            insertbackground="black"
+            insertbackground="black",
+            highlightthickness=0.5
         )
 
         scroll_y.pack(side=RIGHT, fill=Y)
