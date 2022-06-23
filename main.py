@@ -27,10 +27,6 @@ def info_about():
     messagebox.showinfo("About Octo", "Created using Python.")
 
 
-def show_additional_characters():
-    messagebox.showinfo("Additional Characters", "More characters here.")
-
-
 class TextEditor:
     def __init__(self, _root):
         self.root = _root
@@ -117,7 +113,7 @@ class TextEditor:
         )
 
         self.help_menu.add_command(label="About", command=info_about)
-        self.help_menu.add_command(label="Additional Characters", command=show_additional_characters)
+        self.help_menu.add_command(label="Additional Characters", command=self.show_additional_characters)
         self.menu_bar.add_cascade(label="Help", menu=self.help_menu)
 
         # ##### SCROLLBAR & TEXT AREA #####
@@ -158,6 +154,11 @@ class TextEditor:
 
         self.shortcuts()
         self.character_reader()
+
+    def show_additional_characters(self):
+        # This will display clickable accented characters.
+        # Clicking them will add them to the main editor window.
+        pass
 
     def on_press(self, event):
         character = greek.CHARACTER_SET.get(event.keysym, "INVALID")
