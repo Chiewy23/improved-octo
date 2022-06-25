@@ -116,6 +116,8 @@ class TextEditor:
         self.help_menu.add_command(label="Additional Characters", command=self.show_additional_characters)
         self.menu_bar.add_cascade(label="Help", menu=self.help_menu)
 
+        # https://www.geeksforgeeks.org/dropdown-menus-tkinter/
+
         # ##### SCROLLBAR & TEXT AREA #####
         scroll_y = Scrollbar(self.root, orient=VERTICAL)
         self.text_area_input = Text(
@@ -154,6 +156,9 @@ class TextEditor:
 
         self.shortcuts()
         self.character_reader()
+
+    def change_dropdown(self):
+        print(self.tk)
 
     def show_additional_characters(self):
         # This will display clickable accented characters.
@@ -280,6 +285,7 @@ class TextEditor:
 
 def main():
     root = Tk()
+    root.iconphoto(False, PhotoImage(file="pi.png"))
     TextEditor(root)
     root.mainloop()
 
